@@ -11,12 +11,24 @@ export default function useLogin() {
     mutationFn: ({ email, password }) => getUser({ email, password }),
 
     onSuccess: () => {
-      queryClient.setQueryData(["user"]);
+      queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+
       toast.success("Login Successfully");
+
       navigate("/dashboard");
     },
-    onError: () => {
+
+    onError: (error) => {
+      console.error("Login error:", error);
       toast.error("Ensure that email and password correctly");
+
+      // Clear any invalid user data on error
+      queryClient.setQueryData(["currentUser"], null);
+    },
+
+    onSettled: () => {
+      // Always invalidate to ensure fresh data
+      queryClient.invalidateQueries({ queryKey: ["currentUser"] });
     },
   });
 

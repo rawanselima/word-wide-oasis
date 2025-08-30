@@ -36,7 +36,7 @@ const Login = () => {
         <div className="text-center">
           <img
             className="w-32 m-auto"
-            src="../../public/assets/logo-light.png"
+            src="/assets/logo-light.png"
             alt="logo"
           />
           <h1 className="text-blue-950 font-bold text-3xl my-8">

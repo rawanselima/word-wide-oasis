@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import useUser from "../hooks/useUser";
 import Loader from "./common/Loader";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +6,17 @@ import { useNavigate } from "react-router-dom";
 const Protected = ({ children }) => {
   const { isLoading, isAuthenticated } = useUser();
   const navigate = useNavigate();
+
+  // Optimize: Memoize the redirect logic to prevent unnecessary re-renders
+  const shouldRedirect = useMemo(() => {
+    return !isLoading && !isAuthenticated;
+  }, [isLoading, isAuthenticated]);
+
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (shouldRedirect) {
       navigate("/login", { replace: true });
     }
-  }, [isLoading, isAuthenticated]);
+  }, [shouldRedirect, navigate]);
 
   if (isLoading) return <Loader />;
 
