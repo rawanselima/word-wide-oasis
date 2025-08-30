@@ -10,7 +10,6 @@ export default defineConfig({
     outDir: "dist",
     assetsDir: "assets",
     sourcemap: false,
-    minify: "terser", // Better minification
     rollupOptions: {
       output: {
         manualChunks: {
