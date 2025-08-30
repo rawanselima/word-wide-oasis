@@ -10,25 +10,17 @@ export default function useLogin() {
   const { mutate, isPending } = useMutation({
     mutationFn: ({ email, password }) => getUser({ email, password }),
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["currentUser"] });
-
+    onSuccess: (user) => {
+      queryClient.setQueryData(["currentUser"], user.user);
       toast.success("Login Successfully");
-
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     },
 
     onError: (error) => {
       console.error("Login error:", error);
       toast.error("Ensure that email and password correctly");
 
-      // Clear any invalid user data on error
       queryClient.setQueryData(["currentUser"], null);
-    },
-
-    onSettled: () => {
-      // Always invalidate to ensure fresh data
-      queryClient.invalidateQueries({ queryKey: ["currentUser"] });
     },
   });
 

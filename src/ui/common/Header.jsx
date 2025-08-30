@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
-import { CiDark } from "react-icons/ci";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import SideBar from "./sidebar";
 import useLogout from "../../hooks/useLogout";
@@ -15,7 +14,7 @@ const Header = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   const { mutate, isPending } = useLogout();
   const { data } = useUser();
-  const { fullName, avatar } = data.user_metadata;
+  // const { fullName, avatar } = data.user_metadata;
   const ref = useRef();
 
   useEffect(() => {
@@ -60,11 +59,13 @@ const Header = () => {
         </ul>
         <div className="flex items-center">
           <img
-            src={avatar || "/assets/team-02.png"}
+            src={data?.user_metadata?.avatar || "/assets/team-02.png"}
             alt="user"
             className="w-8 h-8 rounded-full mr-2"
           />
-          <span className="text-gray-700"> {fullName} </span>
+          <span className="text-gray-700">
+            {data?.user_metadata?.fullName || "Guest"}
+          </span>
         </div>
       </header>
 

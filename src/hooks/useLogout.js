@@ -9,8 +9,8 @@ export default function useLogout() {
   const { mutate, isPending } = useMutation({
     mutationFn: userLogout,
     onSuccess: () => {
-      clientQuery.clear();
-      navigate("/login");
+      clientQuery.removeQueries({ queryKey: ["currentUser"] });
+      navigate("/login", { replace: true });
     },
   });
 

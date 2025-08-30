@@ -49,7 +49,7 @@ function ChartSales({ data, numDays }) {
 
   return (
     <section className="bg-white p-6 rounded my-6 border-2 border-gray-100">
-      <h2 className="text-xl font-bold text-gray-700 mb-4 flex items-center">
+      <h2 className="text-xl font-bold text-gray-700 mb-4 flex flex-wrap items-center">
         {allDates.length > 0 && (
           <>
             {`Sales From ${format(allDates[0], "MMM dd yyyy")}`}
@@ -66,7 +66,7 @@ function ChartSales({ data, numDays }) {
             data={allData}
             margin={{
               top: 10,
-              right: 30,
+              right: 10,
               left: 0,
               bottom: 0,
             }}

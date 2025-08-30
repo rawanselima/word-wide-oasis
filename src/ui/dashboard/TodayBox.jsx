@@ -17,7 +17,7 @@ const TodayBox = ({ item }) => {
   const numNights = item.numNights || "Unknown";
 
   return (
-    <div className="flex items-center justify-between my-1 py-1/2 border-b-2 border-gray-50">
+    <div className="flex items-center flex-wrap justify-between my-1 py-1/2 border-b-2 border-gray-50">
       <div className="flex items-center">
         <p
           className={`mr-3 text-xs font-bold uppercase  px-3 py-1 rounded-full ${

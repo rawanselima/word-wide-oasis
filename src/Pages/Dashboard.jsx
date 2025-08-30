@@ -55,7 +55,7 @@ const Dashboard = memo(() => {
           </div>
         </section>
         <Statics data={data} numDays={numDays} />
-        <section className="grid grid-cols-2 gap-3">
+        <section className="grid xl:grid-cols-2 grid-cols-1 gap-3">
           <TodayCheckIn data={data} />
           <ChartDuration data={data} />
         </section>

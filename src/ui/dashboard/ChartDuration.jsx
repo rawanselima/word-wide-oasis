@@ -1,5 +1,12 @@
 import React, { memo, useEffect, useState } from "react";
-import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF1025", "#C49F"];
 
@@ -34,7 +41,6 @@ const ChartDuration = ({ data }) => {
     }));
 
     setChartDurationData(formatted);
-
   }, [data]);
 
   return (
@@ -42,31 +48,65 @@ const ChartDuration = ({ data }) => {
       <h2 className="text-xl font-bold text-gray-700 mb-4 flex items-center p-5">
         Stay duration summary
       </h2>
-      <PieChart width={500} height={200}>
-        <Tooltip />
-        <Legend
-          verticalAlign="middle"
-          align="right"
-          width="30%"
-          layout="vertical"
-          iconSize={15}
-          iconType="circle"
-        />
-        <Pie
-          data={chartDurationData}
-          cx={100}
-          cy={100}
-          innerRadius={60}
-          outerRadius={80}
-          fill="#8884d8"
-          paddingAngle={3}
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={index} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
+
+      {/* Large screens (2xl and above) - Legend on right */}
+      <div className="hidden 2xl:block">
+        <PieChart width={500} height={200}>
+          <Tooltip />
+          <Legend
+            verticalAlign="middle"
+            align="right"
+            width="30%"
+            layout="vertical"
+            iconSize={15}
+            iconType="circle"
+          />
+          <Pie
+            data={chartDurationData}
+            cx={100}
+            cy={100}
+            innerRadius={60}
+            outerRadius={80}
+            fill="#8884d8"
+            paddingAngle={3}
+            dataKey="value"
+          >
+            {chartDurationData.map((entry, index) => (
+              <Cell key={index} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </div>
+
+      {/* Medium and small screens (xl and below) - Legend below */}
+      <div className="2xl:hidden">
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Tooltip />
+            <Legend
+              verticalAlign="bottom"
+              align="center"
+              layout="horizontal"
+              iconSize={15}
+              iconType="circle"
+            />
+            <Pie
+              data={chartDurationData}
+              cx="50%"
+              cy="40%"
+              innerRadius={60}
+              outerRadius={80}
+              fill="#8884d8"
+              paddingAngle={3}
+              dataKey="value"
+            >
+              {chartDurationData.map((entry, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

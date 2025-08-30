@@ -15,29 +15,21 @@ export async function getUser({ email, password }) {
 }
 
 export async function getCurrentUser() {
-  // Optimize: Use getSession() only, it already contains user data
   const { data: session } = await supabase.auth.getSession();
-
   if (!session.session) return null;
 
-  // Return user data directly from session instead of making another API call
-  return session.session.user;
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error) throw new Error(error.message);
+  return data?.user;
 }
 
 export async function userLogout() {
-  try {
-    // Optimize: Clear local data first for instant UI response
-    const { error } = await supabase.auth.signOut();
+  let { error } = await supabase.auth.signOut();
 
-    if (error) {
-      console.error("Failed Logout:", error);
-      throw new Error(error.message);
-    }
-
-    return { success: true };
-  } catch (error) {
-    console.error("Logout error:", error);
-    throw error;
+  if (error) {
+    console.error("Failed Logout ");
+    throw new Error(error.message);
   }
 }
 
