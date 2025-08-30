@@ -9,7 +9,7 @@ const UserProfile = lazy(() => import("./Pages/UserProfile"));
 const User = lazy(() => import("./Pages/User"));
 const BookingDetails = lazy(() => import("./Pages/BookingDetails"));
 const Login = lazy(() => import("./Pages/Login"));
-const CheckInBooking = lazy(() => import("./Pages/CheckinBooking"));
+const CheckInBooking = lazy(() => import("./Pages/CheckInBooking"));
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
 const AppLayout = lazy(() => import("./Pages/AppLayout"));
 const Booking = lazy(() => import("./Pages/Booking"));
