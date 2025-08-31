@@ -57,7 +57,7 @@ const Cabin = () => {
     <>
       <Header />
       <main className="pt-5 bg-gray-50 min-h-screen">
-        <section className="flex justify-between flex-wrap mt-20 px-5">
+        <section className="flex justify-between items-center flex-wrap mt-20 px-5">
           <h1 className="text-3xl font-bold text-gray-700"> All Cabins </h1>
           <div className="flex flex-wrap items-center">
             <div className="bg-white border-1 border-gray-100 p-2 rounded my-2">

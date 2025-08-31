@@ -7,7 +7,7 @@ const FilterButton = ({ children, onClick, filterLabel }) => {
 
   return (
     <button
-      className={`px-3 py-1 outline-0 rounded-lg  mr-2 ${
+      className={`px-3 py-1 outline-0 rounded-lg  mr-2 my-2 ${
         label.toLocaleLowerCase().replace("-", " ") ===
         children.toLocaleLowerCase()
           ? "bg-blue-800 text-white cursor-not-allowed"
